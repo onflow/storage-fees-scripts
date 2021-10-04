@@ -24,12 +24,6 @@ Get the current flat rate transaction inclusion fee in FLOW.
 flow scripts execute scripts/get_transaction_fee.cdc
 ```
 
-### Set transaction fee
-
-```sh
-flow transactions send transactions/set_transaction_fee.cdc --arg UFix64:0.5
-```
-
 ### Get current storage minimum (FLOW)
 
 Get the current storage minimum fee in FLOW.
@@ -62,6 +56,24 @@ flow scripts execute scripts/get_storage_used.cdc --arg Address:0xf8d6e0586b0a20
 
 ## Tansactions
 
+### Set transaction fee
+
+```sh
+flow transactions send transactions/set_transaction_fee.cdc --arg UFix64:0.5
+```
+
+### Set storage cost (FLOW/MB)
+
+```sh
+flow transactions send transactions/set_storage_cost.cdc --arg UFix64:20.0
+```
+
+### Set storage minimum (FLOW)
+
+```sh
+flow transactions send transactions/set_storage_min.cdc --arg UFix64:1.0
+```
+
 ### Sample transaction
 
 Run a dummy transaction that emits fee events.
@@ -85,3 +97,17 @@ flow transactions send transactions/create_nft.cdc
 Emitted on every transaction, indicating the transaction fees paid for the transaction.
 
 `A.e5a8b7f23e8b548f.FlowFees.TokensDeposited`
+
+### Transaction fee changed
+
+`A.f8d6e0586b0a20c7.FlowServiceAccount.TransactionFeeUpdated`
+
+### Storage cost changed
+
+Note: this event emits the MB per FLOW. Take the inverse to get cost per FLOW.
+
+`A.f8d6e0586b0a20c7.FlowStorageFees.StorageMegaBytesPerReservedFLOWChanged`
+
+### Storage minimum changed
+
+`A.f8d6e0586b0a20c7.FlowStorageFees.MinimumStorageReservationChanged`
